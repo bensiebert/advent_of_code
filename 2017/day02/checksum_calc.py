@@ -1,5 +1,4 @@
-import pytest
-from itertools import combinations, tee
+from itertools import combinations
 
 def convert_to_ints(file_input):
     for line in file_input:
@@ -42,9 +41,7 @@ def test_pt2():
     
 if __name__ == '__main__':
     with open('input', 'r') as f:
-        spreadsheet_pt1, spreadsheet_pt2 = tee(convert_to_ints(f))
-        checksum_pt1 = calc_checksum(spreadsheet_pt1, diff_of_min_and_max)
-        checksum_pt2 = calc_checksum(spreadsheet_pt2, div_of_evenly_divisible)
-    print(f"Result part1: {checksum_pt1}")
-    print(f"Result part2: {checksum_pt2}")
+        spreadsheet = list(convert_to_ints(f))
+        print(f"Result part1: { calc_checksum(spreadsheet, diff_of_min_and_max) }")
+        print(f"Result part2: { calc_checksum(spreadsheet, div_of_evenly_divisible) }")
 
