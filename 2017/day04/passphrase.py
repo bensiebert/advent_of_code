@@ -1,4 +1,4 @@
-from itertools import combinations, tee
+from itertools import combinations
 
 def equality_policy(passphrase):
     """ Tests if words in passphrase only occur once
