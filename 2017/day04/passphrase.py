@@ -1,4 +1,5 @@
 from itertools import combinations
+from collections import Counter
 
 def equality_policy(passphrase):
     """ Tests if words in passphrase only occur once
@@ -29,7 +30,21 @@ def is_anagram(w1, w2):
     >>> is_anagram('oiii', 'ooii')
     False
     """
-    return sorted(w1) == sorted(w2)
+    # Anagrams must have the same length
+    if len(w1) != len(w2):
+        return False
+
+    # Test if anagram by comparing the counts of the letters.
+    # First create a dictionary of letter counts for the first word.
+    # Then subtract the letter counts from that dictionary.
+    letter_count = Counter(w1)
+    for letter in w2:
+        try:
+            letter_count[letter] -= 1
+        except:
+            return False
+
+    return all(value == 0 for key, value in letter_count.items())
 
 def anagram_policy(passphrase):
     """ Tests if passphrase does not contain anagrams
