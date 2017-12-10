@@ -38,7 +38,7 @@ def reallocate(mem_banks, target):
 def solve(mem_banks):
     """
     >>> solve([0,2,7,0])
-    5
+    (5, 4)
     """
     past_layouts = []
     realloc_cnt = 0
@@ -47,12 +47,18 @@ def solve(mem_banks):
         target = find_target(mem_banks)
         reallocate(mem_banks, target)
         realloc_cnt += 1
-    return realloc_cnt
+
+    cycle_start_idx = past_layouts.index(mem_banks)
+    cycle_length = realloc_cnt - cycle_start_idx
+
+    return realloc_cnt, cycle_length
 
 def main():
     with open('input.txt', 'r') as f:
         mem_banks = [int(bank) for bank in f.read().split()]
-        print(f"Part 1: { solve(mem_banks) }")
+        reallocations, cycle_length = solve(mem_banks) 
+        print(f"Part 1: { reallocations }")
+        print(f"Part 2: { cycle_length }")
 
 if __name__ == '__main__':
     main()
